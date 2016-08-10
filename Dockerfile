@@ -1,14 +1,14 @@
-FROM alpine:3.2
+FROM alpine:3.4
 
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
-RUN echo "http://nl.alpinelinux.org/alpine/v3.2/main" > /etc/apk/repositories
+RUN echo "http://nl.alpinelinux.org/alpine/v3.4/main" > /etc/apk/repositories
 
 COPY libs/* /tmp/
 
 RUN apk update &&\
     apk add python \
             python-dev \
-	    ca-certificates \
+            ca-certificates \
             py-pip \
             openntpd \
             build-base \
@@ -21,10 +21,14 @@ RUN apk update &&\
 RUN source /tmp/blas.sh
 RUN source /tmp/lapack.sh
 
-# Install numpy and pandas
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+
+# Install numpy, pandas, scipy and scikit
 RUN pip install --upgrade pip
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v numpy==1.9.0
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v pandas==0.14.1
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v numpy==1.11.0
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v pandas==0.18.0
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v scipy==0.18.0
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v scikit-learn==0.17.1
 
 # Clean up
 RUN mv ~/src/BLAS/libfblas.a /tmp/
