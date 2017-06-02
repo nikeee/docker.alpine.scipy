@@ -1,7 +1,7 @@
 # Alpine based Dockerimage for Python with SciPy-stack
 
 This repository contains a Dockerfile for building a python ready image
-that is running based on Alpine 3.4 and Python 2.7
+that is running based on Alpine 3.4 and Python 3.6
 
 It provides the following python libaries
 
@@ -10,16 +10,10 @@ It provides the following python libaries
 - scipy (0.18.0)
 - scikit-learn (0.17.1)
 
-To build the image execute the following command
+To build the image execute the following command in the repository root directory:
 
 ```
-docker build -t rs-dev-registry.sachdev.intern:5000/check24/alpine-scipy .
+docker build .
 ```
 
-To push the latest build to the rs-docker-registry you've to enter the
-following command:
-
-```
-docker push rs-dev-registry.sachdev.intern:5000/check24/alpine-scipy
-```
-
+This will be made available on Docker hub as cathalgarvey/alpine-python3-scipy for use as a base in other images.
