@@ -6,16 +6,16 @@ RUN echo "http://nl.alpinelinux.org/alpine/v3.4/main" > /etc/apk/repositories
 COPY libs/* /tmp/
 
 RUN apk update &&\
-    apk add python \
-            python-dev \
+    apk add python3 \
+            python3-dev \
             ca-certificates \
-            py-pip \
             openntpd \
             build-base \
-            python-dev \
             musl-dev \
             gfortran \
             libgfortran
+
+RUN python3 /tmp/get-pip.py
 
 # Build BLAS and LAPACK
 RUN source /tmp/blas.sh
@@ -24,7 +24,6 @@ RUN source /tmp/lapack.sh
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 # Install numpy, pandas, scipy and scikit
-RUN pip install --upgrade pip
 RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v numpy==1.11.0
 RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v pandas==0.18.0
 RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip install -v scipy==0.18.0
@@ -42,5 +41,3 @@ RUN rm -rf /tmp/*
 
 # Remove all the extra build stuff
 RUN apk del build-base "*-dev"
-
-
