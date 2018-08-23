@@ -24,10 +24,10 @@ RUN source /tmp/lapack.sh
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 # Install numpy, pandas, scipy and scikit
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v numpy==1.13.1
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v pandas==0.20.3
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v scipy==0.19.1
-RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v scikit-learn[alldeps]==0.18.2
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v numpy==1.15.1
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v pandas==0.23.4
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v scipy==1.1.0
+RUN BLAS=~/src/BLAS/libfblas.a LAPACK=~/src/lapack-3.5.0/liblapack.a pip3.6 install -v scikit-learn[alldeps]==0.19.2
 
 # Clean up
 RUN mv ~/src/BLAS/libfblas.a /tmp/
