@@ -1,7 +1,7 @@
-FROM alpine:3.6
+FROM alpine:3.8
 
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
-RUN echo "http://nl.alpinelinux.org/alpine/v3.6/main" > /etc/apk/repositories
+RUN echo "http://nl.alpinelinux.org/alpine/v3.8/main" > /etc/apk/repositories
 
 COPY libs/* /tmp/
 
